@@ -31,3 +31,4 @@ E:\UCSC\Project\Enhanzer\BookApi\BookApi\obj\Debug\net10.0\refint\BookApi.dll
 E:\UCSC\Project\Enhanzer\BookApi\BookApi\obj\Debug\net10.0\BookApi.pdb
 E:\UCSC\Project\Enhanzer\BookApi\BookApi\obj\Debug\net10.0\BookApi.genruntimeconfig.cache
 E:\UCSC\Project\Enhanzer\BookApi\BookApi\obj\Debug\net10.0\ref\BookApi.dll
+E:\UCSC\Project\Enhanzer\BookApi\BookApi\obj\Debug\net10.0\BookApi.sourcelink.json

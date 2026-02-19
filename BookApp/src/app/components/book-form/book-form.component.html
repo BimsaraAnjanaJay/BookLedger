@@ -1,0 +1,95 @@
+<div class="form-container fade-in">
+    <!-- Editing / Adding Mode Header -->
+    <div class="header-section text-center mb-4">
+        <h2 class="title">{{ isEditMode ? 'Edit Book Details' : 'Add New Book' }}</h2>
+        <p class="subtitle text-muted">{{ isEditMode ? 'Update the information below.' : 'Fill in the details to add a
+            new book to the library.' }}</p>
+    </div>
+
+    <div class="card shadow-lg border-0 rounded-lg">
+        <div class="card-body p-5">
+            <div *ngIf="!submitted">
+                <!-- Title Input -->
+                <div class="form-group mb-4">
+                    <label for="title" class="form-label font-weight-bold ml-1">Title</label>
+                    <div class="input-group input-group-lg">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-white border-right-0"><i
+                                    class="fas fa-book text-primary"></i></span>
+                        </div>
+                        <input type="text" class="form-control border-left-0" id="title" required
+                            [(ngModel)]="book.title" name="title" placeholder="e.g. The Great Gatsby" />
+                    </div>
+                </div>
+
+                <!-- Author Input -->
+                <div class="form-group mb-4">
+                    <label for="author" class="form-label font-weight-bold ml-1">Author</label>
+                    <div class="input-group input-group-lg">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-white border-right-0"><i
+                                    class="fas fa-user-edit text-success"></i></span>
+                        </div>
+                        <input type="text" class="form-control border-left-0" id="author" required
+                            [(ngModel)]="book.author" name="author" placeholder="e.g. F. Scott Fitzgerald" />
+                    </div>
+                </div>
+
+                <!-- ISBN Input -->
+                <div class="form-group mb-4">
+                    <label for="isbn" class="form-label font-weight-bold ml-1">ISBN</label>
+                    <div class="input-group input-group-lg">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-white border-right-0"><i
+                                    class="fas fa-barcode text-warning"></i></span>
+                        </div>
+                        <input type="text" class="form-control border-left-0" id="isbn" required [(ngModel)]="book.isbn"
+                            name="isbn" placeholder="e.g. 978-3-16-148410-0" />
+                    </div>
+                </div>
+
+                <!-- Publication Date Input -->
+                <div class="form-group mb-5">
+                    <label for="publicationDate" class="form-label font-weight-bold ml-1">Publication Date</label>
+                    <div class="input-group input-group-lg">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-white border-right-0"><i
+                                    class="far fa-calendar-alt text-danger"></i></span>
+                        </div>
+                        <input type="date" class="form-control border-left-0" id="publicationDate" required
+                            [(ngModel)]="book.publicationDate" name="publicationDate" [max]="maxDate" />
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="d-flex justify-content-end mt-4">
+                    <button (click)="saveBook()" class="btn btn-primary btn-lg px-5 shadow-sm mr-3">
+                        <i class="fas fa-check-circle"></i> {{ isEditMode ? 'Update Book' : 'Submit Book' }}
+                    </button>
+                    <a routerLink="/books" class="btn btn-light btn-lg text-secondary border">
+                        Cancel
+                    </a>
+                </div>
+            </div>
+
+            <!-- Submitted State -->
+            <div *ngIf="submitted" class="text-center py-5 fade-in">
+                <div class="success-icon mb-4">
+                    <i class="fas fa-check-circle text-success display-1"></i>
+                </div>
+                <h3 class="mb-3">Success!</h3>
+                <p class="text-muted mb-4">The book has been successfully {{ isEditMode ? 'updated' : 'added' }}.</p>
+
+                <div class="d-flex justify-content-center">
+                    <button class="btn btn-success btn-lg shadow-sm mr-3"
+                        (click)="submitted = false; book = {id:0, title:'', author:'', isbn:'', publicationDate:''}; isEditMode = false">
+                        <i class="fas fa-plus"></i> Add Another
+                    </button>
+                    <a routerLink="/books" class="btn btn-primary btn-lg shadow-sm">
+                        <i class="fas fa-list"></i> View List
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
