@@ -18,7 +18,8 @@
                                     class="fas fa-book text-primary"></i></span>
                         </div>
                         <input type="text" class="form-control border-left-0" id="title" required
-                            [(ngModel)]="book.title" name="title" placeholder="e.g. The Great Gatsby" />
+                            [(ngModel)]="book.title" name="title" placeholder="e.g. The Great Gatsby"
+                            #title="ngModel" />
                     </div>
                 </div>
 
@@ -31,7 +32,12 @@
                                     class="fas fa-user-edit text-success"></i></span>
                         </div>
                         <input type="text" class="form-control border-left-0" id="author" required
-                            [(ngModel)]="book.author" name="author" placeholder="e.g. F. Scott Fitzgerald" />
+                            pattern="^[a-zA-Z\s.]+$" [(ngModel)]="book.author" name="author"
+                            placeholder="e.g. F. Scott Fitzgerald" #author="ngModel" />
+                    </div>
+                    <div *ngIf="author.invalid && (author.dirty || author.touched)" class="text-danger small mt-1 ml-1">
+                        <div *ngIf="author.errors?.['required']">Author is required.</div>
+                        <div *ngIf="author.errors?.['pattern']">Author can only contain letters, spaces, and dots.</div>
                     </div>
                 </div>
 
@@ -43,8 +49,12 @@
                             <span class="input-group-text bg-white border-right-0"><i
                                     class="fas fa-barcode text-warning"></i></span>
                         </div>
-                        <input type="text" class="form-control border-left-0" id="isbn" required [(ngModel)]="book.isbn"
-                            name="isbn" placeholder="e.g. 978-3-16-148410-0" />
+                        <input type="text" class="form-control border-left-0" id="isbn" required pattern="^[0-9-]+$"
+                            [(ngModel)]="book.isbn" name="isbn" placeholder="e.g. 978-3-16-148410-0" #isbn="ngModel" />
+                    </div>
+                    <div *ngIf="isbn.invalid && (isbn.dirty || isbn.touched)" class="text-danger small mt-1 ml-1">
+                        <div *ngIf="isbn.errors?.['required']">ISBN is required.</div>
+                        <div *ngIf="isbn.errors?.['pattern']">ISBN can only contain numbers and dashes.</div>
                     </div>
                 </div>
 
@@ -57,7 +67,13 @@
                                     class="far fa-calendar-alt text-danger"></i></span>
                         </div>
                         <input type="date" class="form-control border-left-0" id="publicationDate" required
-                            [(ngModel)]="book.publicationDate" name="publicationDate" [max]="maxDate" />
+                            [(ngModel)]="book.publicationDate" name="publicationDate" [max]="maxDate"
+                            #pubDate="ngModel" />
+                    </div>
+                    <div *ngIf="pubDate.invalid && (pubDate.dirty || pubDate.touched)"
+                        class="text-danger small mt-1 ml-1">
+                        <div *ngIf="pubDate.errors?.['required']">Publication Date is required.</div>
+                        <div *ngIf="pubDate.errors?.['max']">Date cannot be in the future.</div>
                     </div>
                 </div>
 

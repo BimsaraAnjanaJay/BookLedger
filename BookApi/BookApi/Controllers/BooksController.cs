@@ -38,6 +38,16 @@ public class BooksController : ControllerBase
             return BadRequest("Publication date cannot be in the future.");
         }
 
+        if (!System.Text.RegularExpressions.Regex.IsMatch(book.Author, @"^[a-zA-Z\s.]+$"))
+        {
+             return BadRequest("Author can only contain letters, spaces, and dots.");
+        }
+        
+        if (!System.Text.RegularExpressions.Regex.IsMatch(book.Isbn, @"^[0-9-]+$"))
+        {
+             return BadRequest("ISBN can only contain numbers and dashes.");
+        }
+
         book.Id = _books.Any() ? _books.Max(b => b.Id) + 1 : 1;
         _books.Add(book);
         return CreatedAtAction(nameof(GetBook), new { id = book.Id }, book);
@@ -54,6 +64,16 @@ public class BooksController : ControllerBase
         if (book.PublicationDate > DateTime.Now)
         {
             return BadRequest("Publication date cannot be in the future.");
+        }
+
+        if (!System.Text.RegularExpressions.Regex.IsMatch(book.Author, @"^[a-zA-Z\s.]+$"))
+        {
+             return BadRequest("Author can only contain letters, spaces, and dots.");
+        }
+        
+        if (!System.Text.RegularExpressions.Regex.IsMatch(book.Isbn, @"^[0-9-]+$"))
+        {
+             return BadRequest("ISBN can only contain numbers and dashes.");
         }
 
         var existingBook = _books.FirstOrDefault(b => b.Id == id);
